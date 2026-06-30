@@ -1,0 +1,70 @@
+---
+title: "Dashboard LISA: Dinámicas de Precios en Lima"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+```{r setup, include=FALSE}
+library(flexdashboard) # always
+library(ggplot2)
+library(sf)
+```
+
+<!-- links -->
+```{r}
+map1link = "map1.rds"
+viz1 = map1link
+
+map2link = "map2.rds"
+viz2 = map2link
+
+map3link = "map3.rds"
+viz3 = map3link
+
+map4link = "map4.rds"
+viz4 = map4link
+```
+
+## Intro {.sidebar}
+Este dashboard presenta un análisis de autocorrelación espacial local (LISA) aplicado al nivel de Educación Secundaria Completa en Lima.
+
+Se evalúa el impacto de 4 tipos diferentes de cálculo de vecindarios para resaltar cómo cambia la sensibilidad y rigidez del modelo en la detección de clusters socioeducativos.
+
+Leyenda de Clasificación:
+
+HotSpot (HH): Altos niveles de educación secundaria completa rodeados de zonas con niveles también altos.
+
+ColdSpot (LL): Bajos niveles de educación secundaria completa rodeados de zonas con niveles también bajos.
+
+HotOutlier (HL): Un área con alto nivel de educación secundaria completa en un entorno de niveles bajos.
+
+ColdOutlier (LH): Un área con bajo nivel de educación secundaria completa en un entorno de niveles altos.
+
+## Column {data-width="500"}
+
+### Criterio 1: Ponderación por Perímetro (Frontera Compartida)
+```{r}
+
+readRDS(viz1)
+```
+
+### Criterio 2: Contigüedad Rook (Solo Lados)
+```{r}
+
+readRDS(viz2)
+```
+
+## Column {data-width="500"}
+
+### Criterio 3: Contigüedad Queen (Lados y Vértices)
+
+```{r}
+readRDS(viz3)
+```
+
+### Criterio 4: K-Nearest Neighbors (K=5 Vecinos Cercanos)
+
+```{r}
+readRDS(viz4)
+```
